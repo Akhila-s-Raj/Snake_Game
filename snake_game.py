@@ -24,15 +24,19 @@ score = 0
 # Display the Score and Title
 pen = turtle.Turtle()
 pen.speed(0)
-pen.color("#0FFF50")
+pen.color("green")
 pen.penup()
 pen.hideturtle()
 pen.goto(0, 260)
-pen.write("Snake Game  Score: 0", align="center", font=("Courier", 24, "bold"))
+pen.write("Snake Game  Score: 0", align="center", font=("Courier", 24, "normal"))
 
 def update_score():
     pen.clear()
-    pen.write(f"Snake Game  Score: {score}", align="center", font=("Courier", 24, "bold"))
+    pen.write(f"Snake Game  Score: {score}", align="center", font=("Courier", 24, "normal"))
+
+def game_over():
+    pen.goto(0, 0)
+    pen.write("GAME OVER", align="center", font=("Courier", 36, "normal"))
 
 def go_up():
     if head.direction != "down":
@@ -95,6 +99,10 @@ while True:
         for segment in segments:
             segment.goto(1000, 1000)
         segments.clear()
+        
+        # Show game over message and stop the game
+        game_over()
+        time.sleep(3)
         score = 0
         update_score()
 
@@ -114,7 +122,7 @@ while True:
         segments.append(new_segment)
 
         # Increase the score
-        score += 1
+        score += 10
         update_score()
 
     # Move the end segments first in reverse order
@@ -143,6 +151,10 @@ while True:
                 segment.goto(1000, 1000)
 
             segments.clear()
+            
+            # Show game over message and stop the game
+            game_over()
+            time.sleep(3)
             score = 0
             update_score()
 
